@@ -1,12 +1,11 @@
 
 import urllib2
 import cookielib
+filename='cookie.txt'
 
-cookie=cookielib.CookieJar()
-hander=urllib2.HTTPCookieProcessor(cookie)
+cookie=cookielib.MozillaCookieJar(filename)
 
-opener=urllib2.build_opener(hander)
-response=opener.open('http://www.baidu.com')
-for item in cookie:
-    print 'name'+item.name
-    print 'value'+item.value
+handler=urllib2.HTTPCookieProcessor(cookie)
+opener=urllib2.build_opener(handler)
+response=opener.open("http://www.baidu.com")
+cookie.save(ignore_discard=True,ignore_expires=True)
