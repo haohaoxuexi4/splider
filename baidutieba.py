@@ -33,6 +33,7 @@ class BDTB:
         self.baseurl=baseurl
         self.seeLZ='?see_lz'+str(seeLZ)
         self.tool=Tool()
+        self.file=None
     def getPage(self,pageNum):
         try:
             url=self.baseurl+self.seeLZ+'&pn='+str(pageNum)
@@ -74,8 +75,13 @@ class BDTB:
             print floor,u"楼-------------"
             print self.tool.replace(item)
             floor+=1
-        #for item in items:
-        #print items[1]
+            if self.file is None:
+                self.file=open('tieba.txt',"w+")
+                #self.file.write(str(floor)+u"lou----------")
+                self.file.write(item)
+            else:
+                #self.file.write(str(floor)+u"lou----------")
+                self.file.write(item)
 baseurl='http://tieba.baidu.com/p/3138733512'
 bdtb=BDTB(baseurl,1)
 bdtb.getTitle()
